@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="//code.jquery.com/jquery.js"></script>
+    <title>Add a reservation</title>
+</head>
+<body>
+    <h1>Making a reservation</h1>
+
+    <div>Name<input type="text" id="customerName"></div>
+    <div>Email<input type="text" id="customerEmail"></div>
+    <div>Id<input type="text" id="customerId"></div>
+    <div>Phone Number<input type="text" id="phoneNumber"></div>
+    <button class="js-submit">Send Reso</button>
+
+    <script>
+        $('.js-submit').on("click", event => {
+            const newReservation = {
+                customerName: $('#customerName').val().trim(),
+                customerEmail: $('#customerEmail').val().trim(),
+                customerId: $('#customerId').val().trim(),
+                phoneNumber: $('#phoneNumber').val().trim(),
+            }
+
+            $.post('/api/tables', newReservation, data => {
+                if (data) {
+                    alert("Congrats, you have a table!")
+                } else {
+                    alert("On the wait list!")
+                }
+            });
+        });
+    </script>    
+
+</body>
+</html>
